@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { ClubSelect } from '@/components/shared/club-select'
 import { BilingualField } from '@/components/shared/bilingual-field'
 import { ImageUpload } from '@/components/shared/image-upload'
+import { useScope } from '@/lib/scope'
 
 interface HistoryFormProps {
   defaultValues?: HistoryNode
@@ -17,6 +18,7 @@ interface HistoryFormProps {
 }
 
 export function HistoryForm({ defaultValues, defaultClub, onSubmit, isSubmitting }: HistoryFormProps) {
+  const { clubs } = useScope()
   const { register, handleSubmit, watch, setValue, formState: { errors } } =
     useForm<HistoryFormValues>({
       resolver: zodResolver(historySchema),
@@ -30,7 +32,7 @@ export function HistoryForm({ defaultValues, defaultClub, onSubmit, isSubmitting
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <ClubSelect value={club} onChange={(v) => setValue('club', v)} />
+      <ClubSelect value={club} onChange={(v) => setValue('club', v)} clubs={clubs} />
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="year">Año / Etiqueta</Label>

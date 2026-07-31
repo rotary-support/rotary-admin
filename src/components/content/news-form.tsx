@@ -19,6 +19,7 @@ interface NewsFormProps {
 }
 
 export function NewsForm({ defaultValues, defaultClub, onSubmit, isSubmitting }: NewsFormProps) {
+  const { clubs } = useScope()
   const { register, handleSubmit, watch, setValue, formState: { errors } } =
     useForm<NewsFormValues>({
       resolver: zodResolver(newsSchema),
@@ -40,7 +41,7 @@ export function NewsForm({ defaultValues, defaultClub, onSubmit, isSubmitting }:
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <ClubSelect value={club} onChange={(v) => setValue('club', v)} />
+      <ClubSelect value={club} onChange={(v) => setValue('club', v)} clubs={clubs} />
       <BilingualField label="Título" nameEs="title_es" nameEn="title_en" register={register} errors={errors} />
       <BilingualField label="Resumen (excerpt)" nameEs="excerpt_es" nameEn="excerpt_en" register={register} errors={errors} textarea rows={2} />
       <BilingualField label="Contenido" nameEs="content_es" nameEn="content_en" register={register} errors={errors} textarea rows={6} />

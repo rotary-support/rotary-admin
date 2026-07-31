@@ -6,8 +6,10 @@ import { type ColumnDef } from '@tanstack/react-table'
 import { adminUsersCrud } from '@/hooks/use-content-tables'
 import { useCrudController } from '@/hooks/use-crud-controller'
 import { adminUserSchema, type AdminUserFormValues } from '@/schemas/content.schema'
+import { useScope } from '@/lib/scope'
 import { DataTable } from '@/components/shared/data-table'
 import { ConfirmDialog } from '@/components/shared/confirm-dialog'
+import { ClubSelect } from '@/components/shared/club-select'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -15,7 +17,13 @@ import { Label } from '@/components/ui/label'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import type { AdminUser } from '@/lib/types'
 
-type Values = { id?: string; email: string; full_name?: string | null; role: 'admin' | 'collaborator' }
+type Values = {
+  id?: string
+  email: string
+  full_name?: string | null
+  role: 'admin' | 'collaborator'
+  club: 'rotary' | 'rotaract'
+}
 
 function AdminUserForm({
   defaultValues,
@@ -27,14 +35,16 @@ function AdminUserForm({
   isSubmitting: boolean
 }) {
   const isEdit = !!defaultValues
+  const { clubs, defaultClub } = useScope()
   const [id, setId] = useState('')
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<AdminUserFormValues>({
     resolver: zodResolver(adminUserSchema),
     defaultValues: defaultValues
-      ? { email: defaultValues.email, full_name: defaultValues.full_name ?? '', role: defaultValues.role }
-      : { role: 'collaborator', email: '', full_name: '' },
+      ? { email: defaultValues.email, full_name: defaultValues.full_name ?? '', role: defaultValues.role, club: defaultValues.club }
+      : { role: 'collaborator', email: '', full_name: '', club: defaultClub },
   })
   const role = watch('role')
+  const club = watch('club')
 
   const submit = (data: AdminUserFormValues) => onSubmit(isEdit ? data : { ...data, id })
 
@@ -58,6 +68,7 @@ function AdminUserForm({
         <Label htmlFor="full_name">Nombre</Label>
         <Input id="full_name" {...register('full_name')} />
       </div>
+      <ClubSelect value={club} onChange={(v) => setValue('club', v)} clubs={clubs} />
       <div className="space-y-2">
         <Label htmlFor="role">Rol</Label>
         <select
@@ -85,6 +96,15 @@ export default function AdminUsersPage() {
   const columns: ColumnDef<AdminUser>[] = [
     { accessorKey: 'email', header: 'Correo', cell: ({ row }) => <span className="font-medium">{row.original.email}</span> },
     { accessorKey: 'full_name', header: 'Nombre', cell: ({ row }) => row.original.full_name ?? '—' },
+    {
+      accessorKey: 'club',
+      header: 'Club',
+      cell: ({ row }) => (
+        <Badge variant="outline" className="capitalize">
+          {row.original.club}
+        </Badge>
+      ),
+    },
     {
       accessorKey: 'role',
       header: 'Rol',

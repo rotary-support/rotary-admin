@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { ClubSelect } from '@/components/shared/club-select'
 import { BilingualField } from '@/components/shared/bilingual-field'
 import { ImageUpload } from '@/components/shared/image-upload'
+import { useScope } from '@/lib/scope'
 
 interface GalleryFormProps {
   defaultValues?: GalleryImage
@@ -17,6 +18,7 @@ interface GalleryFormProps {
 }
 
 export function GalleryForm({ defaultValues, defaultClub, onSubmit, isSubmitting }: GalleryFormProps) {
+  const { clubs } = useScope()
   const { register, handleSubmit, watch, setValue, formState: { errors } } =
     useForm<GalleryFormValues>({
       resolver: zodResolver(gallerySchema),
@@ -30,7 +32,7 @@ export function GalleryForm({ defaultValues, defaultClub, onSubmit, isSubmitting
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <ClubSelect value={club} onChange={(v) => setValue('club', v)} />
+      <ClubSelect value={club} onChange={(v) => setValue('club', v)} clubs={clubs} />
       <ImageUpload prefix="gallery" value={imagePath} onChange={(p) => setValue('image_path', p ?? '')} label="Imagen" />
       {errors.image_path && <p className="text-sm text-destructive">{errors.image_path.message}</p>}
       <BilingualField label="Mensaje de la imagen" nameEs="caption_es" nameEn="caption_en" register={register} errors={errors} />

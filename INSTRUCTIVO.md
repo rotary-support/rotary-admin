@@ -6,11 +6,17 @@ Panel para administrar el contenido del sitio del **Club Rotario de Mayagüez**.
 Inicia sesión con tu correo y contraseña. Si no tienes cuenta, un administrador debe crearla
 (en Supabase Authentication) y asignarte un rol en la sección **Usuarios**.
 
-## 2. Roles
-| Sección | Admin | Colaborador |
-|---|---|---|
-| Proyectos, Historia, Mensajes, Usuarios | ✅ | ❌ |
-| Eventos, Noticias, Galería | ✅ | ✅ |
+## 2. Roles y club
+Cada usuario tiene un **club** (Rotary o Rotaract) y un **rol** (Administrador o Colaborador):
+
+| Usuario | Qué puede hacer |
+|---|---|
+| **Rotary — Administrador** | Todo, en **ambos** clubes (super admin). |
+| **Rotaract — Administrador** | Todo, pero **solo Rotaract**. |
+| **Rotary — Colaborador** | Solo **Eventos, Noticias e Historia** de Rotary. |
+| **Rotaract — Colaborador** | Solo **Eventos, Noticias e Historia** de Rotaract. |
+
+Proyectos, Galería, Mensajes y Usuarios son solo para administradores. Quien no sea Rotary admin queda **fijado a su club** (el selector de club aparece bloqueado).
 
 ## 3. Idiomas
 Cada texto tiene **dos campos: Español (ES) e Inglés (EN)**. Llena ambos para que el sitio

@@ -42,5 +42,5 @@ export const historyCrud = makeCrud<HistoryNode, HistoryFormValues>('history_nod
 
 export const adminUsersCrud = makeCrud<
   AdminUser,
-  { id?: string; email: string; full_name?: string | null; role: 'admin' | 'collaborator' }
+  { id?: string; email: string; full_name?: string | null; role: 'admin' | 'collaborator'; club: 'rotary' | 'rotaract' }
 >('admin_users', { column: 'created_at', ascending: false })

@@ -75,5 +75,6 @@ export const adminUserSchema = z.object({
   email: z.string().email('Correo inválido'),
   full_name: z.string().optional().or(z.literal('')),
   role: z.enum(['admin', 'collaborator']),
+  club: clubEnum,
 })
 export type AdminUserFormValues = z.infer<typeof adminUserSchema>
