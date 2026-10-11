@@ -29,11 +29,12 @@ export function GalleryForm({ defaultValues, defaultClub, onSubmit, isSubmitting
 
   const club = watch('club')
   const imagePath = watch('image_path')
+  const imageFocus = watch('image_focus')
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <ClubSelect value={club} onChange={(v) => setValue('club', v)} clubs={clubs} />
-      <ImageUpload prefix="gallery" value={imagePath} onChange={(p) => setValue('image_path', p ?? '')} label="Imagen" />
+      <ImageUpload prefix="gallery" value={imagePath} onChange={(p) => setValue('image_path', p ?? '')} focus={imageFocus} onFocusChange={(f) => setValue('image_focus', f)} label="Imagen" />
       {errors.image_path && <p className="text-sm text-destructive">{errors.image_path.message}</p>}
       <BilingualField label="Mensaje de la imagen" nameEs="caption_es" nameEn="caption_en" register={register} errors={errors} />
       <div className="space-y-2">

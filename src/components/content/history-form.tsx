@@ -29,6 +29,7 @@ export function HistoryForm({ defaultValues, defaultClub, onSubmit, isSubmitting
 
   const club = watch('club')
   const imagePath = watch('image_path')
+  const imageFocus = watch('image_focus')
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -46,7 +47,7 @@ export function HistoryForm({ defaultValues, defaultClub, onSubmit, isSubmitting
       </div>
       <BilingualField label="Título" nameEs="title_es" nameEn="title_en" register={register} errors={errors} />
       <BilingualField label="Descripción" nameEs="description_es" nameEn="description_en" register={register} errors={errors} textarea rows={3} />
-      <ImageUpload prefix="history" value={imagePath} onChange={(p) => setValue('image_path', p)} />
+      <ImageUpload prefix="history" value={imagePath} onChange={(p) => setValue('image_path', p)} focus={imageFocus} onFocusChange={(f) => setValue('image_focus', f)} />
 
       <div className="flex justify-end">
         <Button type="submit" disabled={isSubmitting}>

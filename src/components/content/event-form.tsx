@@ -38,6 +38,7 @@ export function EventForm({ defaultValues, defaultClub, onSubmit, isSubmitting }
   const club = watch('club')
   const isPublished = watch('is_published')
   const imagePath = watch('image_path')
+  const imageFocus = watch('image_focus')
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -58,7 +59,7 @@ export function EventForm({ defaultValues, defaultClub, onSubmit, isSubmitting }
       </div>
 
       <BilingualField label="Lugar" nameEs="location_es" nameEn="location_en" register={register} errors={errors} />
-      <ImageUpload prefix="events" value={imagePath} onChange={(p) => setValue('image_path', p)} />
+      <ImageUpload prefix="events" value={imagePath} onChange={(p) => setValue('image_path', p)} focus={imageFocus} onFocusChange={(f) => setValue('image_focus', f)} />
 
       <div className="flex items-center gap-3">
         <Switch checked={isPublished} onCheckedChange={(c) => setValue('is_published', c)} />

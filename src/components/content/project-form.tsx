@@ -32,13 +32,14 @@ export function ProjectForm({ defaultValues, defaultClub, onSubmit, isSubmitting
   const showOnHome = watch('show_on_home')
   const isPublished = watch('is_published')
   const imagePath = watch('image_path')
+  const imageFocus = watch('image_focus')
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <ClubSelect value={club} onChange={(c) => setValue('club', c)} clubs={clubs} />
       <BilingualField label="Título" nameEs="title_es" nameEn="title_en" register={register} errors={errors} />
       <BilingualField label="Descripción" nameEs="description_es" nameEn="description_en" register={register} errors={errors} textarea rows={3} />
-      <ImageUpload prefix="projects" value={imagePath} onChange={(p) => setValue('image_path', p)} />
+      <ImageUpload prefix="projects" value={imagePath} onChange={(p) => setValue('image_path', p)} focus={imageFocus} onFocusChange={(f) => setValue('image_focus', f)} />
 
       <div className="space-y-2">
         <Label htmlFor="sort_order">Orden</Label>
