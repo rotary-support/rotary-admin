@@ -9,6 +9,7 @@ export const projectSchema = z.object({
   description_es: z.string().optional().or(z.literal('')),
   description_en: z.string().optional().or(z.literal('')),
   image_path: z.string().nullable().optional(),
+  image_focus: z.string().optional(),
   show_on_home: z.boolean(),
   sort_order: z.number().int(),
   is_published: z.boolean(),
@@ -26,6 +27,7 @@ export const eventSchema = z.object({
   location_es: z.string().optional().or(z.literal('')),
   location_en: z.string().optional().or(z.literal('')),
   image_path: z.string().nullable().optional(),
+  image_focus: z.string().optional(),
   is_published: z.boolean(),
 })
 export type EventFormValues = z.infer<typeof eventSchema>
@@ -39,6 +41,7 @@ export const newsSchema = z.object({
   content_es: z.string().optional().or(z.literal('')),
   content_en: z.string().optional().or(z.literal('')),
   image_path: z.string().nullable().optional(),
+  image_focus: z.string().optional(),
   published_at: z.string().min(1, 'Fecha requerida'),
   is_published: z.boolean(),
 })
@@ -47,6 +50,7 @@ export type NewsFormValues = z.infer<typeof newsSchema>
 export const gallerySchema = z.object({
   club: clubEnum,
   image_path: z.string().min(1, 'Imagen requerida'),
+  image_focus: z.string().optional(),
   caption_es: z.string().optional().or(z.literal('')),
   caption_en: z.string().optional().or(z.literal('')),
   sort_order: z.number().int(),
@@ -61,6 +65,7 @@ export const historySchema = z.object({
   description_es: z.string().optional().or(z.literal('')),
   description_en: z.string().optional().or(z.literal('')),
   image_path: z.string().nullable().optional(),
+  image_focus: z.string().optional(),
   sort_order: z.number().int(),
 })
 export type HistoryFormValues = z.infer<typeof historySchema>

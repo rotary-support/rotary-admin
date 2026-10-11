@@ -26,7 +26,7 @@ export default function ProjectsPage() {
       header: '',
       cell: ({ row }) =>
         row.original.image_path ? (
-          <img src={mediaUrl(row.original.image_path)} alt="" className="h-10 w-14 rounded object-cover" />
+          <img src={mediaUrl(row.original.image_path)} alt="" className="h-10 w-14 rounded object-cover" style={{ objectPosition: row.original.image_focus }} />
         ) : (
           <div className="h-10 w-14 rounded bg-muted" />
         ),

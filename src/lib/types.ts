@@ -34,6 +34,7 @@ export interface Project {
   description_es: string | null
   description_en: string | null
   image_path: string | null
+  image_focus: string
   show_on_home: boolean
   sort_order: number
   is_published: boolean
@@ -53,6 +54,7 @@ export interface Event {
   location_es: string | null
   location_en: string | null
   image_path: string | null
+  image_focus: string
   is_published: boolean
   created_at: string
   updated_at: string
@@ -68,6 +70,7 @@ export interface News {
   content_es: string | null
   content_en: string | null
   image_path: string | null
+  image_focus: string
   published_at: string
   is_published: boolean
   created_at: string
@@ -78,6 +81,7 @@ export interface GalleryImage {
   id: string
   club: Club
   image_path: string
+  image_focus: string
   caption_es: string | null
   caption_en: string | null
   sort_order: number
@@ -94,6 +98,7 @@ export interface HistoryNode {
   description_es: string | null
   description_en: string | null
   image_path: string | null
+  image_focus: string
   sort_order: number
   created_at: string
   updated_at: string

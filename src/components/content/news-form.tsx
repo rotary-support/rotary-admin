@@ -38,6 +38,7 @@ export function NewsForm({ defaultValues, defaultClub, onSubmit, isSubmitting }:
   const club = watch('club')
   const isPublished = watch('is_published')
   const imagePath = watch('image_path')
+  const imageFocus = watch('image_focus')
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -45,7 +46,7 @@ export function NewsForm({ defaultValues, defaultClub, onSubmit, isSubmitting }:
       <BilingualField label="Título" nameEs="title_es" nameEn="title_en" register={register} errors={errors} />
       <BilingualField label="Resumen (excerpt)" nameEs="excerpt_es" nameEn="excerpt_en" register={register} errors={errors} textarea rows={2} />
       <BilingualField label="Contenido" nameEs="content_es" nameEn="content_en" register={register} errors={errors} textarea rows={6} />
-      <ImageUpload prefix="news" value={imagePath} onChange={(p) => setValue('image_path', p)} />
+      <ImageUpload prefix="news" value={imagePath} onChange={(p) => setValue('image_path', p)} focus={imageFocus} onFocusChange={(f) => setValue('image_focus', f)} />
 
       <div className="space-y-2">
         <Label htmlFor="published_at">Fecha de publicación</Label>

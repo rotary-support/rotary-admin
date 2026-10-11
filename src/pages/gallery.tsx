@@ -39,7 +39,7 @@ export default function GalleryPage() {
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {rows.map((img) => (
             <div key={img.id} className="group relative overflow-hidden rounded-lg border">
-              <img src={mediaUrl(img.image_path)} alt={img.caption_es ?? ''} className="aspect-square w-full object-cover" />
+              <img src={mediaUrl(img.image_path)} alt={img.caption_es ?? ''} className="aspect-square w-full object-cover" style={{ objectPosition: img.image_focus }} />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-2">
                 <p className="truncate text-xs text-white">{img.caption_es || '(sin mensaje)'}</p>
               </div>
